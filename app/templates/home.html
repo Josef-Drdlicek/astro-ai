@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Denní horoskopy{% endblock %}
+{% block content %}
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1 class="page-title">🌞 Denní horoskopy</h1>
+    <p class="lede">
+      Vyberte své znamení a nechte hvězdy promluvit. Každý den nová inspirace, energie a vhled do vašeho nitra. ✨
+    </p>
+  </div>
+</section>
+
+<section class="grid">
+  {% for s in signs %}
+  <a class="card hover-float" href="{{ url_for('core.sign_detail', slug=s.slug) }}">
+    <div class="card-emoji">{{ s.emoji }}</div>
+    <div class="card-title">{{ s.name }}</div>
+    <div class="card-subtitle">{{ s.dates }}</div>
+  </a>
+  {% endfor %}
+</section>
+
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}{{ sign.name }} – astrologický profil{% endblock %}
+{% block content %}
+
+<!-- HERO SEKCE -->
+<section class="sign-hero {{ profile.element|lower }}">
+  <div class="hero-inner">
+    <div class="hero-icon">{{ sign.emoji }}</div>
+    <div class="hero-info">
+      <h1 class="hero-name">{{ sign.name }}</h1>
+      <div class="hero-dates">{{ sign.dates }} · {{ profile.element }} · Dnes: {{ today }}</div>
+      <p class="hero-desc">{{ profile.description }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- OBSAH -->
+<div class="sign-layout">
+  <aside class="sidebar">
+    <div class="sidebar-title">🪐 Sekce</div>
+    <a href="#daily">Denní horoskop</a>
+    <a href="#profile">Profil znamení</a>
+    <a href="#love">Láska</a>
+    <a href="#career">Kariéra</a>
+    <a href="#health">Zdraví</a>
+    <a href="#compatibility">Kompatibilita</a>
+    <a href="#affirmations">Afirmace</a>
+    <a href="#personal">Osobní výklad</a>
+  </aside>
+
+  <article class="sign-content">
+
+    <section id="daily" class="section highlight">
+      <h2>🔮 Denní horoskop</h2>
+      <div class="daily-block">
+        <p><strong>Téma dne:</strong> {{ horoscope.focus }}</p>
+        <ul>
+          <li>💞 {{ horoscope.love }}</li>
+          <li>💼 {{ horoscope.career }}</li>
+          <li>🌿 {{ horoscope.wellbeing }}</li>
+        </ul>
+        <blockquote>„{{ horoscope.mantra }}“</blockquote>
+        <p class="numbers">✨ <strong>Šťastná čísla:</strong> {{ horoscope.lucky_numbers | join(', ') }}</p>
+      </div>
+    </section>
+
+    <section id="profile" class="section">
+      <h2>🌟 Charakteristika znamení</h2>
+      <div class="traits-grid">
+        <div><strong>Element:</strong> {{ profile.element }}</div>
+        <div><strong>Vládnoucí planeta:</strong> {{ profile.planet }}</div>
+      </div>
+      <p class="lead">{{ profile.description }}</p>
+      <h3>Silné stránky</h3>
+      <ul class="traits">{% for s in profile.strengths %}<li>✅ {{ s }}</li>{% endfor %}</ul>
+      <h3>Růstové oblasti</h3>
+      <ul class="traits">{% for g in profile.growth %}<li>🌱 {{ g }}</li>{% endfor %}</ul>
+    </section>
+
+    <section id="love" class="section love">
+      <h2>❤️ Láska</h2>
+      <p>{{ profile.love_profile }}</p>
+    </section>
+
+    <section id="career" class="section career">
+      <h2>💼 Kariéra</h2>
+      <p>{{ profile.career_profile }}</p>
+    </section>
+
+    <section id="health" class="section health">
+      <h2>🌿 Zdraví</h2>
+      <p>{{ profile.health_profile }}</p>
+    </section>
+
+    <section id="compatibility" class="section">
+      <h2>💞 Kompatibilita</h2>
+      <p><strong>Nejlépe si rozumí s:</strong> {{ profile.compatibility.best | join(', ') }}</p>
+      <p><strong>Výzvy přichází s:</strong> {{ profile.compatibility.challenge | join(', ') }}</p>
+    </section>
+
+    <section id="affirmations" class="section">
+      <h2>🧘 Afirmace</h2>
+      <ul>{% for a in profile.affirmations %}<li>„{{ a }}“</li>{% endfor %}</ul>
+      <blockquote>„{{ profile.quote }}“</blockquote>
+    </section>
+
+    <section id="famous" class="section">
+      <h2>🌟 Slavné osobnosti {{ profile.name }}</h2>
+      <p>{{ profile.famous | join(', ') }}</p>
+    </section>
+
+    <section id="personal" class="section cta">
+      <h2>🔮 Váš osobní výklad</h2>
+      <form method="POST" class="personal-form">
+        <input name="name" placeholder="Vaše jméno" required>
+        <select name="focus">
+          <option value="láska">Láska</option>
+          <option value="práce">Práce</option>
+          <option value="zdraví">Zdraví</option>
+          <option value="vše" selected>Celkově</option>
+        </select>
+        <button type="submit" class="button">Získat osobní horoskop ✨</button>
+      </form>
+
+      {% if personalized %}
+      <div class="personal-result">
+        <h3>💫 Osobní výklad</h3>
+        <p>{{ personalized.focus }}</p>
+        <p>{{ personalized.love }}</p>
+        <p>{{ personalized.career }}</p>
+        <p>{{ personalized.wellbeing }}</p>
+      </div>
+      {% endif %}
+    </section>
+
+  </article>
+</div>
+
+{% endblock %}

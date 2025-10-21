@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ config.APP_NAME }} – {% block title %}{% endblock %}</title>
+
+  <!-- Font + CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="/" class="brand-link">
+          <span class="logo">🔮</span> <span class="brand-name">Astro AI</span>
+        </a>
+      </div>
+      <nav class="nav">
+        <a href="/" class="nav-link">Horoskopy</a>
+        <a href="#" class="nav-link muted" aria-disabled="true">Výklad snů <span class="soon-tag">soon</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© {{ config.APP_NAME }} · Nejde o zdravotní ani finanční poradenství.</div>
+      <div class="muted small"><a href="#" aria-disabled="true">Zásady ochrany</a></div>
+    </div>
+  </footer>
+</body>
+</html>
