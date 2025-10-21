@@ -15,13 +15,6 @@ Umožňuje zobrazit **denní horoskop, osobní výklad i detailní profil znamen
 
 ---
 
-## 🖼️ Náhledy
-
-| Domovská stránka | Detail znamení |
-|------------------|----------------|
-
----
-
 ## 🧩 Instalace a spuštění
 
 ### 1️⃣ Klonování repozitáře
